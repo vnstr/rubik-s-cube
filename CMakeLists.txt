@@ -24,6 +24,8 @@ find_package(glfw3 3.3.8 REQUIRED)
 
 add_executable(${PROJECT_NAME}
   SourceFiles/main.cpp
+  SourceFiles/core/logger.h
+  SourceFiles/core/logger.cpp
   SourceFiles/ui/glview.h
   SourceFiles/ui/glview.cpp
   SourceFiles/ui/main_window.h
