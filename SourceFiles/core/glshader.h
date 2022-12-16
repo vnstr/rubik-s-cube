@@ -1,0 +1,35 @@
+#ifndef SOURCEFILES_CORE_GLSHADER_H_
+#define SOURCEFILES_CORE_GLSHADER_H_
+
+#include <glfw/glfw3.h>
+
+namespace RCube {
+namespace Core {
+
+class GLShader final {
+ public:
+  GLShader() = default;
+  GLShader(const GLShader &) = delete;
+  GLShader(GLShader &&);
+  GLShader &operator=(const GLShader &) = delete;
+  GLShader &operator=(GLShader &&);
+  ~GLShader();
+
+  void Delete();
+
+  /**
+   * @param type Must be either GL_VERTEX_SHADER or GL_FRAGMENT_SHADER.
+   * @return false if error.
+   */
+  bool Create(GLenum type);
+
+  bool IsCreated() const;
+
+ private:
+  GLuint handle_{0};
+};
+
+};  // namespace Core
+};  // namespace RCube
+
+#endif  // SOURCEFILES_CORE_GLSHADER_H_

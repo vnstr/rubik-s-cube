@@ -26,6 +26,8 @@ add_executable(${PROJECT_NAME}
   SourceFiles/main.cpp
   SourceFiles/core/glerror.h
   SourceFiles/core/glerror.cpp
+  SourceFiles/core/glshader.h
+  SourceFiles/core/glshader.cpp
   SourceFiles/core/logger.h
   SourceFiles/core/logger.cpp
   SourceFiles/ui/glview.h
