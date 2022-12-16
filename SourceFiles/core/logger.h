@@ -6,6 +6,7 @@
 #include <string>
 #include <vector>
 
+namespace RCube {
 namespace Core {
 
 class Logger final {
@@ -33,5 +34,6 @@ class Logger final {
 };
 
 };  // namespace Core
+};  // namespace RCube
 
 #endif  // SOURCEFILES_CORE_LOGGER_H_

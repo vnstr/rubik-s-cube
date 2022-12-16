@@ -4,6 +4,7 @@
 
 #include "core/logger.h"
 
+namespace RCube {
 namespace UI {
 
 GLView::GLView(QWidget *parent, Qt::WindowFlags flags)
@@ -24,3 +25,4 @@ void GLView::paintGL() {}
 void GLView::resizeGL(int w, int h) {}
 
 };  // namespace UI
+};  // namespace RCube

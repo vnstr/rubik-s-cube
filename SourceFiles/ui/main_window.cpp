@@ -4,6 +4,7 @@
 
 #include "ui/glview.h"
 
+namespace RCube {
 namespace UI {
 
 MainWindow::MainWindow(QWidget *parent, Qt::WindowFlags flags)
@@ -31,3 +32,4 @@ void MainWindow::Init() {
 }
 
 };  // namespace UI
+};  // namespace RCube

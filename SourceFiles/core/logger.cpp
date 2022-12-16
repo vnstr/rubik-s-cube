@@ -1,5 +1,6 @@
 #include "core/logger.h"
 
+namespace RCube {
 namespace Core {
 
 std::string Logger::ToPrefix(const std::vector<std::string> &names) {
@@ -86,3 +87,4 @@ Logger &Logger::Instance() {
 }
 
 };  // namespace Core
+};  // namespace RCube

@@ -5,6 +5,7 @@
 
 class QVBoxLayout;
 
+namespace RCube {
 namespace UI {
 
 class MainWindow : public QMainWindow {
@@ -25,5 +26,6 @@ class MainWindow : public QMainWindow {
 };
 
 };  // namespace UI
+};  // namespace RCube
 
 #endif  // SOURCEFILES_UI_MAIN_WINDOW_H_

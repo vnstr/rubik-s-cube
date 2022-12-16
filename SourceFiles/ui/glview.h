@@ -5,6 +5,7 @@
 
 #include <QOpenGLWidget>
 
+namespace RCube {
 namespace UI {
 
 class GLView : public QOpenGLWidget {
@@ -23,5 +24,6 @@ class GLView : public QOpenGLWidget {
 };
 
 };  // namespace UI
+};  // namespace RCube
 
 #endif  // SOURCEFILES_UI_GLVIEW_H_
