@@ -24,6 +24,8 @@ find_package(glfw3 3.3.8 REQUIRED)
 
 add_executable(${PROJECT_NAME}
   SourceFiles/main.cpp
+  SourceFiles/core/glerror.h
+  SourceFiles/core/glerror.cpp
   SourceFiles/core/logger.h
   SourceFiles/core/logger.cpp
   SourceFiles/ui/glview.h
@@ -31,6 +33,8 @@ add_executable(${PROJECT_NAME}
   SourceFiles/ui/main_window.h
   SourceFiles/ui/main_window.cpp
 )
+
+add_compile_definitions(GL_SILENCE_DEPRECATION)
 
 target_include_directories(${PROJECT_NAME} PRIVATE SourceFiles)
 
