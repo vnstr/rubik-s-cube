@@ -2,6 +2,7 @@
 #define SOURCEFILES_CORE_GLSHADER_H_
 
 #include <glfw/glfw3.h>
+#include <string>
 
 namespace RCube {
 namespace Core {
@@ -22,8 +23,10 @@ class GLShader final {
    * @return false if error.
    */
   bool Create(GLenum type);
-
   bool IsCreated() const;
+
+  bool SetSourceCode(const std::string &);
+  bool Compile();
 
  private:
   GLuint handle_{0};
