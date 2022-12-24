@@ -24,6 +24,8 @@ find_package(glfw3 3.3.8 REQUIRED)
 
 add_executable(${PROJECT_NAME}
   SourceFiles/main.cpp
+  SourceFiles/core/glbuffer.h
+  SourceFiles/core/glbuffer.cpp
   SourceFiles/core/glerror.h
   SourceFiles/core/glerror.cpp
   SourceFiles/core/glprogram.h
