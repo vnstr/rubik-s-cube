@@ -16,6 +16,8 @@ class GLShader final {
   GLShader &operator=(GLShader &&);
   ~GLShader();
 
+  GLuint GetHandle() const;
+
   void Delete();
 
   /**

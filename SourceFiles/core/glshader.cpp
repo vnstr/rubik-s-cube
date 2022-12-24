@@ -28,6 +28,8 @@ GLShader &GLShader::operator=(GLShader &&x) {
 
 GLShader::~GLShader() { Delete(); }
 
+GLuint GLShader::GetHandle() const { return handle_; }
+
 void GLShader::Delete() {
   glDeleteShader(handle_);
   handle_ = 0;
