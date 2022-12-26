@@ -31,6 +31,8 @@ add_executable(${PROJECT_NAME}
   SourceFiles/core/glprogram.cpp
   SourceFiles/core/glshader.h
   SourceFiles/core/glshader.cpp
+  SourceFiles/core/glvertex_array.h
+  SourceFiles/core/glvertex_array.cpp
   SourceFiles/core/logger.h
   SourceFiles/core/logger.cpp
   SourceFiles/ui/glview.h
