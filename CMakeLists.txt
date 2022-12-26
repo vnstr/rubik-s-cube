@@ -19,7 +19,6 @@ set(CMAKE_PREFIX_PATH ${CMAKE_PREFIX_PATH}$ENV{QT6_DIR})
 
 find_package(Qt6 REQUIRED COMPONENTS Widgets)
 find_package(Qt6 REQUIRED COMPONENTS OpenGLWidgets)
-find_package(Qt6 REQUIRED COMPONENTS OpenGL)
 find_package(glfw3 3.3.8 REQUIRED)
 
 add_executable(${PROJECT_NAME}
@@ -48,6 +47,5 @@ target_link_libraries(
   ${PROJECT_NAME}
   Qt6::Widgets
   Qt6::OpenGLWidgets
-  Qt6::OpenGL
   glfw
 )
