@@ -36,6 +36,8 @@ add_executable(${PROJECT_NAME}
   SourceFiles/core/glvertex_array.cpp
   SourceFiles/core/logger.h
   SourceFiles/core/logger.cpp
+  SourceFiles/core/triangle_painter.h
+  SourceFiles/core/triangle_painter.cpp
   SourceFiles/ui/glview.h
   SourceFiles/ui/glview.cpp
   SourceFiles/ui/main_window.h
