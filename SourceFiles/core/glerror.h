@@ -1,7 +1,7 @@
 #ifndef SOURCEFILES_CORE_GLERROR_H_
 #define SOURCEFILES_CORE_GLERROR_H_
 
-#include <glfw/glfw3.h>
+#include <QOpenGLFunctions_4_1_Compatibility>
 #include <cassert>
 #include <functional>
 #include <string>

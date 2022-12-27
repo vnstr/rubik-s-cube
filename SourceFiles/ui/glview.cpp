@@ -15,12 +15,17 @@ void GLView::initializeGL() {
   std::string msg;
   msg.reserve(64);
 
-  msg += "GL_VERSION: \"";
+  msg += "\nGL_VERSION: \"";
   msg += reinterpret_cast<const char *>(glGetString(GL_VERSION));
+  msg += "\"";
+
+  msg += "\nGL_RENDERER: \"";
+  msg += reinterpret_cast<const char *>(glGetString(GL_RENDERER));
   msg += "\" ";
 
-  msg += "GL_RENDERER: \"";
-  msg += reinterpret_cast<const char *>(glGetString(GL_RENDERER));
+  msg += "\nGL_SHADING_LANGUAGE_VERSION: \"";
+  msg +=
+      reinterpret_cast<const char *>(glGetString(GL_SHADING_LANGUAGE_VERSION));
   msg += "\"";
   Core::Logger::Log(msg);
 

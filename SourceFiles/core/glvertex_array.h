@@ -1,10 +1,7 @@
 #ifndef SOURCEFILES_CORE_GLVERTEX_ARRAY_H_
 #define SOURCEFILES_CORE_GLVERTEX_ARRAY_H_
 
-#include <OpenGL/gl3.h>
-#define GLFW_INCLUDE_NONE
-#include <glfw/glfw3.h>
-#undef GLFW_INCLUDE_NONE
+#include <QOpenGLFunctions_4_1_Compatibility>
 
 #include <memory>
 #include <set>

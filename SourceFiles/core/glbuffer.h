@@ -1,7 +1,7 @@
 #ifndef SOURCEFILES_CORE_GLBUFFER_H_
 #define SOURCEFILES_CORE_GLBUFFER_H_
 
-#include <glfw/glfw3.h>
+#include <QOpenGLFunctions_4_1_Compatibility>
 
 namespace RCube {
 namespace Core {

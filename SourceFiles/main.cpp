@@ -1,4 +1,5 @@
 #include <QApplication>
+#include <QSurfaceFormat>
 #include <iostream>
 
 #include "core/logger.h"
@@ -6,7 +7,13 @@
 
 using Logger = RCube::Core::Logger;
 
-int main(int argc, char **argv) {
+int main(int argc, char** argv) {
+  auto gl_format = QSurfaceFormat::defaultFormat();
+  gl_format.setMajorVersion(4);
+  gl_format.setMinorVersion(1);
+  gl_format.setProfile(QSurfaceFormat::CoreProfile);
+  QSurfaceFormat::setDefaultFormat(gl_format);
+
   try {
     Logger::Enable(true);
     QApplication app(argc, argv);
@@ -22,4 +29,3 @@ int main(int argc, char **argv) {
 
   return 0;
 }
-
