@@ -3,8 +3,14 @@
 
 #include <QOpenGLFunctions_4_1_Compatibility>
 #include <QOpenGLWidget>
+#include <memory>
 
 namespace RCube {
+
+namespace Core {
+class TrianglePainter;
+};
+
 namespace UI {
 
 class GLView : public QOpenGLWidget {
@@ -16,10 +22,14 @@ class GLView : public QOpenGLWidget {
   GLView(GLView &&) = delete;
   GLView &operator=(const GLView &) = delete;
   GLView &operator=(GLView &&) = delete;
+  ~GLView();
 
   void initializeGL() override;
   void paintGL() override;
   void resizeGL(int w, int h) override;
+
+ private:
+  std::unique_ptr<Core::TrianglePainter> trianglePainter_;
 };
 
 };  // namespace UI
