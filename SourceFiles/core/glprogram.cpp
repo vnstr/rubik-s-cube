@@ -100,5 +100,22 @@ bool GLProgram::Link() {
   return false;
 }
 
+bool GLProgram::Use() {
+  if (!IsCreated()) {
+    LogFailedProgramNotCreated(__FUNCTION__);
+    return false;
+  }
+
+  auto err = GLError::Call([this]() { glUseProgram(handle_); });
+  if (err) {
+    err.Log(Logger::ToPrefix({__FUNCTION__, "glUseProgram"}));
+    return false;
+  }
+
+  return true;
+}
+
+void GLProgram::UnUse() { glUseProgram(0); }
+
 };  // namespace Core
 };  // namespace RCube

@@ -23,6 +23,9 @@ class GLProgram final {
   bool AttachShader(const GLShader &);
   bool Link();
 
+  bool Use();
+  void UnUse();
+
  private:
   GLuint handle_{0};
 };
