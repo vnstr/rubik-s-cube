@@ -42,7 +42,7 @@ bool GLShader::Create(GLenum type) {
       [&new_handle, type]() { new_handle = glCreateShader(type); });
 
   if (err) {
-    err.Log(Logger::ToPrefix({__FUNCTION__, "glCreateShader"}));
+    err.Log(Logger::ToPrefix({__PRETTY_FUNCTION__, "glCreateShader"}));
     return false;
   }
 
@@ -55,7 +55,7 @@ bool GLShader::IsCreated() const { return handle_ != 0; }
 
 bool GLShader::SetSourceCode(const std::string &code) {
   if (!IsCreated()) {
-    LogFailedShaderNotCreated(__FUNCTION__);
+    LogFailedShaderNotCreated(__PRETTY_FUNCTION__);
     return false;
   }
 
@@ -67,7 +67,7 @@ bool GLShader::SetSourceCode(const std::string &code) {
   if (err) {
     std::string msg;
     msg.reserve(64);
-    msg = __FUNCTION__;
+    msg = __PRETTY_FUNCTION__;
     msg += ": \n<\n";
     msg += code;
     msg += "\n>: glShaderSource: ";
@@ -80,7 +80,7 @@ bool GLShader::SetSourceCode(const std::string &code) {
 
 bool GLShader::Compile() {
   if (!IsCreated()) {
-    LogFailedShaderNotCreated(__FUNCTION__);
+    LogFailedShaderNotCreated(__PRETTY_FUNCTION__);
     return false;
   }
 
@@ -102,7 +102,7 @@ bool GLShader::Compile() {
 
   std::string msg;
   msg.reserve(256);
-  msg = __FUNCTION__;
+  msg = __PRETTY_FUNCTION__;
   msg += ": failed: glCompileShader:\n<\n";
   msg += reinterpret_cast<const char *>(info.data());
   msg += ">";

@@ -31,7 +31,7 @@ void GLView::initializeGL() {
 
   auto error = Core::GLError::Call([]() { glClearColor(0, 1, 0, 0); });
   if (error) {
-    error.Log(Core::Logger::ToPrefix({__FUNCTION__, "glClearColor"}));
+    error.Log(Core::Logger::ToPrefix({__PRETTY_FUNCTION__, "glClearColor"}));
   }
 }
 

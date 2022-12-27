@@ -43,7 +43,7 @@ bool GLVertexArray::Generate() {
       GLError::Call([&new_handle]() { glGenVertexArrays(1, &new_handle); });
 
   if (err) {
-    err.Log(Logger::ToPrefix({__FUNCTION__, "glGenVertexArrays"}));
+    err.Log(Logger::ToPrefix({__PRETTY_FUNCTION__, "glGenVertexArrays"}));
     return false;
   }
 
@@ -56,7 +56,7 @@ bool GLVertexArray::IsGenerated() const { return handle_ != 0; }
 
 bool GLVertexArray::Bind() {
   if (!IsGenerated()) {
-    auto msg = Logger::ToPrefix({__FUNCTION__});
+    auto msg = Logger::ToPrefix({__PRETTY_FUNCTION__});
     msg += "failed: buffer isn't generated";
     Logger::Log(msg, Logger::Level::kError);
     return false;
@@ -65,7 +65,7 @@ bool GLVertexArray::Bind() {
   auto err = GLError::Call([this]() { glBindVertexArray(handle_); });
 
   if (err) {
-    err.Log(Logger::ToPrefix({__FUNCTION__, "glBindVertexArray"}));
+    err.Log(Logger::ToPrefix({__PRETTY_FUNCTION__, "glBindVertexArray"}));
     return false;
   }
 
@@ -79,14 +79,14 @@ bool GLVertexArray::AddBuffer(GLuint location, std::shared_ptr<GLBuffer> buff) {
 
   GLenum buff_data_type;
   if (!buff->DataType(&buff_data_type)) {
-    auto msg = Logger::ToPrefix({__FUNCTION__});
+    auto msg = Logger::ToPrefix({__PRETTY_FUNCTION__});
     msg += "failed: buff doesn't have data type";
     Logger::Log(msg, Logger::Level::kError);
     return false;
   }
 
   if (!buff->Bind() || !Bind()) {
-    LogBindFailed(__FUNCTION__);
+    LogBindFailed(__PRETTY_FUNCTION__);
     return false;
   }
 
@@ -94,7 +94,8 @@ bool GLVertexArray::AddBuffer(GLuint location, std::shared_ptr<GLBuffer> buff) {
       GLError::Call([location]() { glEnableVertexAttribArray(location); });
 
   if (err) {
-    err.Log(Logger::ToPrefix({__FUNCTION__, "glEnableVertexAttribArray"}));
+    err.Log(
+        Logger::ToPrefix({__PRETTY_FUNCTION__, "glEnableVertexAttribArray"}));
     buff->Unbind();
     Unbind();
     return false;
@@ -109,7 +110,7 @@ bool GLVertexArray::AddBuffer(GLuint location, std::shared_ptr<GLBuffer> buff) {
   Unbind();
 
   if (err) {
-    err.Log(Logger::ToPrefix({__FUNCTION__, "glVertexAttribPointer"}));
+    err.Log(Logger::ToPrefix({__PRETTY_FUNCTION__, "glVertexAttribPointer"}));
     return false;
   }
 
@@ -125,7 +126,7 @@ bool GLVertexArray::RemoveBuffer(GLuint location) {
   }
 
   if (!Bind()) {
-    LogBindFailed(__FUNCTION__);
+    LogBindFailed(__PRETTY_FUNCTION__);
     return false;
   }
 
@@ -135,7 +136,8 @@ bool GLVertexArray::RemoveBuffer(GLuint location) {
   Unbind();
 
   if (err) {
-    err.Log(Logger::ToPrefix({__FUNCTION__, "glDisableVertexAttribArray"}));
+    err.Log(
+        Logger::ToPrefix({__PRETTY_FUNCTION__, "glDisableVertexAttribArray"}));
     return false;
   }
 

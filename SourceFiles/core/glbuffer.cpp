@@ -61,7 +61,7 @@ bool GLBuffer::Generate() {
 
   auto err = GLError::Call([&new_handle]() { glGenBuffers(1, &new_handle); });
   if (err) {
-    err.Log(Logger::ToPrefix({__FUNCTION__, "glGenBuffers"}));
+    err.Log(Logger::ToPrefix({__PRETTY_FUNCTION__, "glGenBuffers"}));
     return false;
   }
 
@@ -74,7 +74,7 @@ bool GLBuffer::IsGenerated() const { return handle_ != 0; }
 
 bool GLBuffer::Bind() {
   if (!IsGenerated()) {
-    auto msg = Logger::ToPrefix({__FUNCTION__});
+    auto msg = Logger::ToPrefix({__PRETTY_FUNCTION__});
     msg += "failed: buffer isn't generated";
     Logger::Log(msg, Logger::Level::kError);
     return false;
@@ -84,7 +84,7 @@ bool GLBuffer::Bind() {
       GLError::Call([this]() { glBindBuffer(GL_ARRAY_BUFFER, handle_); });
 
   if (err) {
-    err.Log(Logger::ToPrefix({__FUNCTION__, "glBindBuffer"}));
+    err.Log(Logger::ToPrefix({__PRETTY_FUNCTION__, "glBindBuffer"}));
     return false;
   }
 
@@ -97,7 +97,7 @@ bool GLBuffer::Fill(const GLvoid *data, GLsizeiptr bytes, GLint components,
                     GLenum type, GLenum usage, GLboolean need_normalize,
                     GLsizei stride) {
   if (!Bind()) {
-    LogBindFailed(__FUNCTION__);
+    LogBindFailed(__PRETTY_FUNCTION__);
     return false;
   }
 
@@ -108,7 +108,7 @@ bool GLBuffer::Fill(const GLvoid *data, GLsizeiptr bytes, GLint components,
   Unbind();
 
   if (err) {
-    err.Log(Logger::ToPrefix({__FUNCTION__, "glBufferData"}));
+    err.Log(Logger::ToPrefix({__PRETTY_FUNCTION__, "glBufferData"}));
     return false;
   }
 
@@ -132,7 +132,7 @@ GLint GLBuffer::Size() {
   Unbind();
 
   if (err) {
-    err.Log(Logger::ToPrefix({__FUNCTION__, "glGetBufferParameteriv"}));
+    err.Log(Logger::ToPrefix({__PRETTY_FUNCTION__, "glGetBufferParameteriv"}));
     return 0;
   }
 

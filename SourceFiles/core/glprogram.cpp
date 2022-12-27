@@ -38,7 +38,7 @@ bool GLProgram::Create() {
 
   auto err = GLError::Call([&new_handle]() { new_handle = glCreateProgram(); });
   if (err) {
-    err.Log(Logger::ToPrefix({__FUNCTION__, "glCreateProgram"}));
+    err.Log(Logger::ToPrefix({__PRETTY_FUNCTION__, "glCreateProgram"}));
     return false;
   }
 
@@ -51,7 +51,7 @@ bool GLProgram::IsCreated() const { return handle_ != 0; }
 
 bool GLProgram::AttachShader(const GLShader &shader) {
   if (!IsCreated()) {
-    LogFailedProgramNotCreated(__FUNCTION__);
+    LogFailedProgramNotCreated(__PRETTY_FUNCTION__);
     return false;
   }
 
@@ -60,7 +60,7 @@ bool GLProgram::AttachShader(const GLShader &shader) {
   });
 
   if (err) {
-    err.Log(Logger::ToPrefix({__FUNCTION__, "glAttachShader"}));
+    err.Log(Logger::ToPrefix({__PRETTY_FUNCTION__, "glAttachShader"}));
     return false;
   }
 
@@ -69,7 +69,7 @@ bool GLProgram::AttachShader(const GLShader &shader) {
 
 bool GLProgram::Link() {
   if (!IsCreated()) {
-    LogFailedProgramNotCreated(__FUNCTION__);
+    LogFailedProgramNotCreated(__PRETTY_FUNCTION__);
     return false;
   }
 
@@ -91,7 +91,7 @@ bool GLProgram::Link() {
 
   std::string msg;
   msg.reserve(256);
-  msg = __FUNCTION__;
+  msg = __PRETTY_FUNCTION__;
   msg += ": failed: glLinkProgram:\n<\n";
   msg += reinterpret_cast<const char *>(info.data());
   msg += ">";
@@ -102,13 +102,13 @@ bool GLProgram::Link() {
 
 bool GLProgram::Use() {
   if (!IsCreated()) {
-    LogFailedProgramNotCreated(__FUNCTION__);
+    LogFailedProgramNotCreated(__PRETTY_FUNCTION__);
     return false;
   }
 
   auto err = GLError::Call([this]() { glUseProgram(handle_); });
   if (err) {
-    err.Log(Logger::ToPrefix({__FUNCTION__, "glUseProgram"}));
+    err.Log(Logger::ToPrefix({__PRETTY_FUNCTION__, "glUseProgram"}));
     return false;
   }
 
