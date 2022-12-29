@@ -20,6 +20,8 @@ set(CMAKE_PREFIX_PATH ${CMAKE_PREFIX_PATH}$ENV{QT6_DIR})
 find_package(Qt6 REQUIRED COMPONENTS Widgets)
 find_package(Qt6 REQUIRED COMPONENTS OpenGLWidgets)
 
+add_subdirectory(ThirdParty/glm)
+
 add_executable(${PROJECT_NAME}
   SourceFiles/main.cpp
   SourceFiles/core/glbuffer.h
@@ -48,4 +50,5 @@ target_link_libraries(
   ${PROJECT_NAME}
   Qt6::Widgets
   Qt6::OpenGLWidgets
+  glm
 )
