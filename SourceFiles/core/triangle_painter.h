@@ -3,6 +3,8 @@
 
 #include <memory>
 
+#include "glm/mat4x4.hpp"
+
 namespace RCube {
 namespace Core {
 
@@ -19,11 +21,13 @@ class TrianglePainter final {
   ~TrianglePainter();
 
   bool Init();
-  bool Draw();
+  bool Draw(int width, int height);
 
  private:
   std::unique_ptr<GLProgram> program_;
   std::unique_ptr<GLVertexArray> vertexArray_;
+  glm::mat4x4 modelMat1_{1.0f};
+  glm::mat4x4 modelMat2_{1.0f};
 };
 
 };  // namespace Core

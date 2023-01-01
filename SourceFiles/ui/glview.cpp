@@ -56,7 +56,7 @@ void GLView::paintGL() {
     return;
   }
 
-  if (!trianglePainter_->Draw()) {
+  if (!trianglePainter_->Draw(width(), height())) {
     auto msg = Core::Logger::ToPrefix({__PRETTY_FUNCTION__, "failed"});
     msg += "TrianglePainter: Draw() had error";
     Core::Logger::Log(msg, Core::Logger::Level::kError);

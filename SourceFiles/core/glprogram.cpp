@@ -5,6 +5,7 @@
 
 #include "core/glerror.h"
 #include "core/logger.h"
+#include "glm/gtc/type_ptr.hpp"
 
 namespace RCube {
 namespace Core {
@@ -98,6 +99,34 @@ bool GLProgram::Link() {
   Logger::Log(msg, Logger::Level::kError);
 
   return false;
+}
+
+bool GLProgram::AddUniform(const std::string &name, const glm::mat4x4 &matrix) {
+  if (!IsCreated()) {
+    LogFailedProgramNotCreated(__PRETTY_FUNCTION__);
+    return false;
+  }
+
+  GLint location_id = 0;
+  auto err = GLError::Call([this, &name, &location_id]() {
+    location_id = glGetUniformLocation(handle_, name.c_str());
+  });
+
+  if (err) {
+    err.Log(Logger::ToPrefix({__PRETTY_FUNCTION__, "glGetUniformLocation"}));
+    return false;
+  }
+
+  err = GLError::Call([this, matrix, location_id]() {
+    glUniformMatrix4fv(location_id, 1, GL_FALSE, glm::value_ptr(matrix));
+  });
+
+  if (err) {
+    err.Log(Logger::ToPrefix({__PRETTY_FUNCTION__, "glUniformMatrix4fv"}));
+    return false;
+  }
+
+  return true;
 }
 
 bool GLProgram::Use() {

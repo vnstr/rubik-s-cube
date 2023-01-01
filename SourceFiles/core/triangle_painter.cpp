@@ -8,14 +8,15 @@
 #include "core/glshader.h"
 #include "core/glvertex_array.h"
 #include "core/logger.h"
+#include "glm/gtc/matrix_transform.hpp"
 
 namespace RCube {
 namespace Core {
 
 const size_t kPointsSize = 9;
 const GLint kPointsComponents = 3;
-const GLfloat kPoints[kPointsSize] = {0.0f, 0.5f,  0.0f,  0.5f, -0.5f,
-                                      0.0f, -0.5f, -0.5f, 0.0f};
+const GLfloat kPoints[kPointsSize] = {0.0f, 50.0f,  0.0f,   50.0f, -50.00f,
+                                      0.0f, -50.0f, -50.0f, 0.0f};
 
 const size_t kColorsSize = 9;
 const GLint kColorsComponents = 3;
@@ -27,9 +28,11 @@ const char* kVertexShaderCode =
     "layout(location = 0) in vec3 vertex_position;"
     "layout(location = 1) in vec3 vertex_color;"
     "out vec3 color;"
+    "uniform mat4 modelMat;"
+    "uniform mat4 projectionMat;"
     "void main() {"
-    "   color = vertex_color;"
-    "   gl_Position = vec4(vertex_position, 1.0);"
+    " color = vertex_color;"
+    " gl_Position = projectionMat * modelMat * vec4(vertex_position, 1.0);"
     "}";
 
 const char* kFragmentShader =
@@ -37,7 +40,7 @@ const char* kFragmentShader =
     "in vec3 color;"
     "out vec4 frag_color;"
     "void main() {"
-    "   frag_color = vec4(color, 1.0);"
+    " frag_color = vec4(color, 1.0);"
     "}";
 
 static void OnFuncFailed(const char* name, const char* what) {
@@ -142,11 +145,13 @@ bool TrianglePainter::Init() {
 
   program_ = std::move(program);
   vertexArray_ = std::move(vertex_array);
+  modelMat1_ = glm::translate(glm::mat4(1.0f), glm::vec3(-125.0f, 0.0f, 0.0f));
+  modelMat2_ = glm::translate(glm::mat4(1.0f), glm::vec3(125.0f, 0.0f, 0.0f));
 
   return true;
 }
 
-bool TrianglePainter::Draw() {
+bool TrianglePainter::Draw(int width, int height) {
   if (!program_ || !vertexArray_) {
     OnFuncFailed(__PRETTY_FUNCTION__, "program or vertex array doesn't exist");
     return false;
@@ -162,7 +167,30 @@ bool TrianglePainter::Draw() {
     return false;
   }
 
+  float right = static_cast<float>(width) / 2;
+  float top = static_cast<float>(height) / 2;
+
+  auto projection_mat =
+      glm::ortho(-1 * right, right, -1 * top, top, -100.0f, 100.0f);
+
+  if (!program_->AddUniform("modelMat", modelMat1_) ||
+      !program_->AddUniform("projectionMat", projection_mat)) {
+    OnFuncFailed(__PRETTY_FUNCTION__, "unable to add a uniform");
+    return false;
+  }
+
   auto err = GLError::Call([]() { glDrawArrays(GL_TRIANGLES, 0, 3); });
+  if (err) {
+    err.Log(Logger::ToPrefix({__PRETTY_FUNCTION__, "glDrawArrays"}));
+    return false;
+  }
+
+  if (!program_->AddUniform("modelMat", modelMat2_)) {
+    OnFuncFailed(__PRETTY_FUNCTION__, "unable to add a uniform");
+    return false;
+  }
+
+  err = GLError::Call([]() { glDrawArrays(GL_TRIANGLES, 0, 3); });
   if (err) {
     err.Log(Logger::ToPrefix({__PRETTY_FUNCTION__, "glDrawArrays"}));
     return false;
