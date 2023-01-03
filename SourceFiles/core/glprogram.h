@@ -2,8 +2,10 @@
 #define SOURCEFILES_CORE_GLPROGRAM_H_
 
 #include <QOpenGLFunctions_4_1_Compatibility>
+#include <string>
 
 #include "core/glshader.h"
+#include "glm/mat4x4.hpp"
 
 namespace RCube {
 namespace Core {
@@ -22,6 +24,8 @@ class GLProgram final {
   bool IsCreated() const;
   bool AttachShader(const GLShader &);
   bool Link();
+
+  bool AddUniform(const std::string &name, const glm::mat4x4 &);
 
   bool Use();
   void UnUse();
